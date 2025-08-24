@@ -20,14 +20,15 @@ private:
     float x, y;
     Texture2D imgs[3];
     Focus focus;
+    MovementState moveState;
     unsigned int count;
-    unsigned int moveState;
 
     void Walk(float dx, float dy, MovementState ms);
     void Input();
 
 public:
-    Player(float x, float y, Texture2D img[3]);
+    Player();
+    ~Player();
     void Update();
     void Draw();
 };

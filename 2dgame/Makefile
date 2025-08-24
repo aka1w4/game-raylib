@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Wall -std=c++17 -I./src
+CXXFLAGS = -Werror -std=c++17 -I./src
 SRC = src/main.cpp src/game.cpp src/player/player.cpp
 OBJ = $(patsubst src/%.cpp, build/%.o, $(SRC))
 LIBS = -lraylib -lm -ldl -lpthread -lGL -lrt -lX11

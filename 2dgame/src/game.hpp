@@ -10,7 +10,7 @@ private:
     std::unique_ptr<Player> player;
 
 public:
-    Game(float x, float y, Texture2D img[3]);
+    Game();
     void Update();
     void Draw();
 };

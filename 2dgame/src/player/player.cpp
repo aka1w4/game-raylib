@@ -7,10 +7,16 @@ const int frameCount = 8;
 const float walkSpeed = 2.5f;
 const float runSpeed = 6.0f;
 
-Player::Player(float x, float y, Texture2D img[3]) : x(x), y(y) {
-  this->imgs[0] = img[0];
-  this->imgs[1] = img[1];
-  this->imgs[2] = img[2];
+Player::Player() : x(100.0f), y(100.0f), focus(Rightfocus) {
+  this->imgs[0] = LoadTexture("assets/female_idle.png");
+  this->imgs[1] = LoadTexture("assets/female_walking.png");
+  this->imgs[2] = LoadTexture("assets/female_runing.png");
+}
+
+Player::~Player() {
+  for (Texture2D &img : imgs) {
+    UnloadTexture(img);
+  } 
 }
 
 void Player::Update() {
@@ -20,7 +26,7 @@ void Player::Update() {
 
 void Player::Draw() {
   Vector2 position = {x, y};
-  int x0 = (count / 5) % frameCount * width;
+  int x0 = (count / 6) % frameCount * width;
   Rectangle sourceRec = {(float)x0, height*(float)focus, width, height};
 
   DrawTextureRec(imgs[moveState], sourceRec, position, WHITE);
@@ -33,22 +39,22 @@ void Player::Input() {
     speed = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? runSpeed : walkSpeed;
     ms = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? isRun : isWalk;
     Walk(0, -speed, ms);
-    focus = Bawah;
+    focus = Upfocus;
   } else if (IsKeyDown(KEY_S)) {
     speed = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? runSpeed : walkSpeed;
     ms = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? isRun : isWalk;
     Walk(0, +speed, ms);
-    focus = Atas;
+    focus = Downfocus;
   } else if (IsKeyDown(KEY_A)) {
     speed = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? runSpeed : walkSpeed;
     ms = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? isRun : isWalk;
     Walk(-speed, 0, ms);
-    focus = Kiri;
+    focus = Leftfocus;
   } else if (IsKeyDown(KEY_D)) {
     speed = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? runSpeed : walkSpeed;
     ms = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT) ? isRun : isWalk;
     Walk(+speed, 0, ms);
-    focus = Kanan;
+    focus = Rightfocus;
   } else {
     moveState = ms;
   }

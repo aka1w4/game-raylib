@@ -2,14 +2,12 @@
 #include "game.hpp"
 
 int main() {
+    //SetTraceLogLevel(LOG_NONE);
     InitWindow(800, 450, "Kepingan Yang Hilang");
+    InitAudioDevice();
     SetTargetFPS(60);
 
-    Texture2D imgs[3];
-    imgs[0] = LoadTexture("assets/female_idle.png");
-    imgs[1] = LoadTexture("assets/female_walking.png");
-    imgs[2] = LoadTexture("assets/female_runing.png");
-    Game *game = new Game(0, 0, imgs);
+    Game *game = new Game();
 
     while (!WindowShouldClose()) {
       game->Update();
@@ -17,9 +15,7 @@ int main() {
     }
 
     delete game;
-    for (Texture2D &img : imgs) {
-      UnloadTexture(img);
-    } 
+    CloseAudioDevice();
     CloseWindow();
     return 0;
 }
