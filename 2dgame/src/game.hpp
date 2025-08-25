@@ -8,6 +8,7 @@
 class Game {
 private:
     std::unique_ptr<Player> player;
+    Rectangle recgame;
 
 public:
     Game();

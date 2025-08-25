@@ -17,7 +17,7 @@ enum MovementState {
 
 class Player {
 private:
-    float x, y;
+    Vector2 pos;
     Texture2D imgs[3];
     Focus focus;
     MovementState moveState;
@@ -31,6 +31,8 @@ public:
     ~Player();
     void Update();
     void Draw();
+    Rectangle GetPlayer();
+    void needpos(Vector2 v);
 };
 
 #endif // !PLAYER_HPP
